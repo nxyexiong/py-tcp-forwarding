@@ -25,7 +25,7 @@ class Conn:
 
  def handle_recv(self):
   while self.running:
-   readable, _, _ = select.select([self.remote_fd, self.client_fd], [], [], 0.001) # 1ms
+   readable, _, _ = select.select([self.remote_fd, self.client_fd], [], [], 1)
    if not readable:
     continue
    for s in readable:
@@ -77,7 +77,7 @@ class Server:
 
  def handle_accept(self):
   while self.running:
-   readable, _, _ = select.select([self.sock, ], [], [], 0.001) # 1ms
+   readable, _, _ = select.select([self.sock, ], [], [], 1)
    if not readable:
     continue
    fd, addr = self.sock.accept()
